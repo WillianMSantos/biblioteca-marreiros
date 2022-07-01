@@ -32,6 +32,7 @@ public class BooksService {
 		}
 		
 		Book book = new Book();
+		book.setId(bookRequestDto.getId());
 		book.setName(bookRequestDto.getName());
 		book.setAuthor(bookRequestDto.getAuthor());
 		
