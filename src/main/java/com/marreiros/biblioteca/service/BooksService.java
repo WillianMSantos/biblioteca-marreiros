@@ -90,7 +90,7 @@ public class BooksService {
 			book.setId(id);
 			
 			if(book.getRented().equals(true)) {
-				throw new BookNotIsRantadException();
+				throw new BookIsRantadException();
 			}
 			
 			book.setRented(true);
@@ -106,7 +106,7 @@ public class BooksService {
 			book.setId(id);
 			
 			if(book.getRented().equals(false)) {
-				throw new BookIsRantadException();
+				throw new BookNotIsRantadException();
 			}
 			
 			book.setRented(false);
