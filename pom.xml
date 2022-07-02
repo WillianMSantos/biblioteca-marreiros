@@ -81,7 +81,7 @@
 				 <archive>
 					 <manifest>
 						 <addClasspath>true</addClasspath>
-						 <classpathPrefix>java/</classpathPrefix>
+						 <classpathPrefix>src/</classpathPrefix>
 						 <mainClass>com.marreiros.biblioteca.BibliotecaApplication</mainClass>
 					 </manifest>
 				 </archive>
