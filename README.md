@@ -15,10 +15,10 @@
 
   
 
--Java 8.
--Spring-boot.
--MongoDb.
--Maven.
+-Java 8.<br>
+-Spring-boot.<br>
+-MongoDb.<br>
+-Maven.<br>
 
 
 
@@ -26,9 +26,9 @@
 
   
 
--1 Baixar/clonar projeto da branch master.
--2 Executar main da classe: BibliotecaApplication.
--3 É necessário ter o mongoDb instalado e conectado.
+-1 Baixar/clonar projeto da branch master.<br>
+-2 Executar main da classe: BibliotecaApplication.<br>
+-3 É necessário ter o mongoDb instalado e conectado.<br>
 
   
 
