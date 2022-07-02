@@ -24,5 +24,3 @@ além de toda documentação com Swagger.
 
 # Swagger
 ![image](https://user-images.githubusercontent.com/47301716/177018211-cb664956-aab0-40c7-b841-d4822710010f.png)
-
-   
