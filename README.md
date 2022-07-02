@@ -10,19 +10,16 @@ além de toda documentação com Swagger.
 # Tecnologias usadas
 
 -Java 8.
-
 -Spring-boot.
-
 -MongoDb.
-
 -Maven.
 
 #Executar projeto
 
--1 Baixar/clonar projeto da branch master.
--2 Executar main da classe: BibliotecaApplication.
--3 É necessário ter o mongoDb instalado e conectado.
--3 Manipulando o CRUD:
+-1 Baixar/clonar projeto da branch master.   
+-2 Executar main da classe: BibliotecaApplication. 
+-3 É necessário ter o mongoDb instalado e conectado.  
+-3 Manipulando o CRUD:  
    3.1-[Swagger ](http://localhost:8080/swagger-ui.html)
 
 # Swagger
