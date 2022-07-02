@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.4.RELEASE</version>
+		<version>2.3.1.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.marreiros</groupId>
@@ -70,42 +70,21 @@
 	</dependencies>
 
 	<build>
+		<plugins>
+			<plugin>
+				<!-- Build an executable JAR -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>com.marreiros.biblioteca.BibliotecaApplication</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
 
-	 <plugins>
-		 <plugin>
-			 <groupId>org.apache.maven.plugins</groupId>
-			 <artifactId>maven-assembly-plugin</artifactId>
-			 <configuration>
-				 <descriptorRefs>
-					 <descriptorRef>jar-with-dependencies</descriptorRef>
-				 </descriptorRefs>
-			 </configuration>
-			 <executions>
-				 <execution>
-					 <id>make-assembly</id>
-					 <phase>package</phase>
-					 <goals>
-						 <goal>single</goal>
-					 </goals>
-				 </execution>
-			 </executions>
-		 </plugin>
-
-		 <plugin>
-			 <!-- Build an executable JAR -->
-			 <groupId>org.apache.maven.plugins</groupId>
-			 <artifactId>maven-jar-plugin</artifactId>
-			 <version>3.1.0</version>
-			 <configuration>
-				 <archive>
-					 <manifest>
-						 <addClasspath>true</addClasspath>
-						 <classpathPrefix>src/</classpathPrefix>
-						 <mainClass>com.marreiros.biblioteca.BibliotecaApplication</mainClass>
-					 </manifest>
-				 </archive>
-			 </configuration>
-		 </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
