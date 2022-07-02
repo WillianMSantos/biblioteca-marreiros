@@ -1,4 +1,4 @@
-<h1 align = "center"> Biblioteca Maarreiros </h1>
+<h1 align = "center"> Biblioteca Marreiros </h1>
 
 <p>Esse projeto foi desenvolvido para realização de um desafio da empresa SoftDesign</p>
 
