@@ -1,18 +1,18 @@
-<h1> biblioteca-marreiros </h1>
+<h1 align="center"> Biblioteca-marreiros </h1>
 Simulando um aluguel de livro
 
-# Sobre o projeto
+<h2> Sobre o projeto
 A aplicação consiste em uma API Rest que possibilita realizar cadastro, edição, aluguel, 
 exclusão e devolução de livros, como se fosse um sistema de uma biblioteca,
 além de toda documentação com Swagger.
 
 
-# Tecnologias usadas
+<h2> Tecnologias utilizadas
 
--Java 8<br>
--Spring-boot.
--MongoDb.
--Maven.
+-Java 8.<br>
+-Spring-boot.<br>
+-MongoDb.<br>
+-Maven.<br>
 
 #Executar projeto
 
