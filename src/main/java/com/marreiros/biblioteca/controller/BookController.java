@@ -1,9 +1,11 @@
 package com.marreiros.biblioteca.controller;
 
 import com.marreiros.biblioteca.dto.request.BookRequestDto;
+import com.marreiros.biblioteca.dto.response.BookResponseDto;
 import com.marreiros.biblioteca.exception.InvalidDataException;
 import com.marreiros.biblioteca.model.Book;
 import com.marreiros.biblioteca.service.BooksService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Api("Biblioteca")
 @RestController
 @RequestMapping("api/books")
 public class BookController {
@@ -28,14 +31,21 @@ public class BookController {
 	
 	@GetMapping("/{name}/find-name")
 	@ApiOperation("Procurar livro pelo nome")
-	public Book findByBookName(@PathVariable String name) {
-		return booksService.findByBookForName(name);
+	public BookResponseDto findByBookName(@PathVariable String name) {
+		return booksService.findBookDtoForName(name);
+	}
+
+
+	@GetMapping("/{isbn}/find-isbn")
+	@ApiOperation("Procurar livro pelo ISBN")
+	public BookResponseDto findByBookForIsbn(@PathVariable String isbn){
+		return booksService.findBookDtoForIsbn(isbn);
 	}
 	
 	@GetMapping("/{id}/find-id")
 	@ApiOperation("Procurar livro pelo ID")
-	public Book findByBookForId(@PathVariable Integer id) {
-		return booksService.findBookForId(id);
+	public BookResponseDto findByBookForId(@PathVariable Integer id) {
+		return booksService.findBookDtoForId(id);
 	}
 	
 	@DeleteMapping("/{id}/book")
@@ -61,7 +71,7 @@ public class BookController {
 	
 	@GetMapping("/list-books")
 	@ApiOperation("Listar livros")
-	public List<Book> findAllBooks() {
+	public List<BookResponseDto> findAllBooks() {
 		return booksService.findAllBooks();
 	}
 	

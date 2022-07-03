@@ -11,4 +11,5 @@ public interface BooksRepository extends MongoRepository<Book, Integer> {
 	
 	Optional<Book> findByName(String name);
 	Optional<Book> findByAuthor(String Author);
+	Optional<Book> findByIsbn(String isbn);
 }
