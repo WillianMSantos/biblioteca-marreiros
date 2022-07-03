@@ -1,10 +1,8 @@
 package com.marreiros.biblioteca.service;
 
 import com.marreiros.biblioteca.dto.request.BookRequestDto;
-import com.marreiros.biblioteca.exception.BookIsRantadException;
-import com.marreiros.biblioteca.exception.BookNotIsRantadException;
-import com.marreiros.biblioteca.exception.ExistingBookException;
-import com.marreiros.biblioteca.exception.InvalidDataException;
+import com.marreiros.biblioteca.dto.response.BookResponseDto;
+import com.marreiros.biblioteca.exception.*;
 import com.marreiros.biblioteca.model.Book;
 import com.marreiros.biblioteca.repository.BooksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BooksService {
-	
+
 	@Autowired
 	private BooksRepository booksRepository;
 	
@@ -27,25 +26,59 @@ public class BooksService {
 		}
 		
 		if(booksRepository.findByName(bookRequestDto.getName()).isPresent() &&
-		   booksRepository.findByAuthor(bookRequestDto.getAuthor()).isPresent()) {
+		    booksRepository.findByAuthor(bookRequestDto.getAuthor()).isPresent() ||
+			booksRepository.findByIsbn(bookRequestDto.getIsbn()).isPresent()) {
 			throw new ExistingBookException();
 		}
 		
 		Book book = new Book();
 		book.setId(bookRequestDto.getId());
 		book.setName(bookRequestDto.getName());
+		book.setStatus("AVAILABLE");
 		book.setAuthor(bookRequestDto.getAuthor());
-		
+
+		boolean isNumeric = verifyIsbnIsNumeric(bookRequestDto.getIsbn());
+
+		if(isNumeric){
+			book.setIsbn(bookRequestDto.getIsbn());
+		}else {
+			throw new IsbnInvalidException();
+		}
+
+		book.setDetails(bookRequestDto.getDetails());
 		booksRepository.save(book);
 		
 		return book;
 	}
-	
+
+	public BookResponseDto findBookDtoForName(String name) {
+		Book book = findByBookForName(name);
+		return BookResponseDto.toBookDto(book);
+	}
+
 	public Book findByBookForName(String name) {
 		return booksRepository.findByName(name)
-				       .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,
-				                                                     "Livro nao encontrado por esse nome"));
-		
+				.orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,
+						"Livro nao encontrado por esse nome"));
+
+	}
+
+	public BookResponseDto findBookDtoForId(Integer id) {
+		Book book = findBookForId(id);
+		return BookResponseDto.toBookDto(book);
+	}
+
+	public BookResponseDto findBookDtoForIsbn(String isbn){
+		Book book = findByBookForIsbn(isbn);
+		return BookResponseDto.toBookDto(book);
+
+	}
+
+	public Book findByBookForIsbn(String isbn) {
+		return booksRepository.findByIsbn(isbn)
+				      .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,
+							                                   "Livro não encontrado"));
+
 	}
 	
 	
@@ -94,6 +127,7 @@ public class BooksService {
 			}
 			
 			book.setRented(true);
+			book.setStatus("RENTED");
 			booksRepository.save(book);
 			return book;
 		}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
@@ -110,13 +144,25 @@ public class BooksService {
 			}
 			
 			book.setRented(false);
+			book.setStatus("AVAILABLE");
 			booksRepository.save(book);
 			return book;
 		}).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
 		                                                 "Livro não encontrado"));
 	}
 	
-	public List<Book> findAllBooks() {
-		return booksRepository.findAll();
+	public List<BookResponseDto> findAllBooks() {
+		List<Book> allBooks = booksRepository.findAll();
+
+		return allBooks.stream()
+				.map(BookResponseDto::toBookDto)
+				.collect(Collectors.toList());
 	}
+
+	public Boolean verifyIsbnIsNumeric(String isbn) {
+		return isbn.chars().allMatch(Character::isDigit);
+	}
+
+
+
 }

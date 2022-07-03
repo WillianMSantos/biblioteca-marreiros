@@ -23,11 +23,17 @@ public class Book {
 	@Field("name")
 	private String name;
 
+	@Field("isbn")
+	private String isbn;
+
 	@Field("author")
 	private String author;
 
 	@Field("rented")
 	private Boolean rented = false;
+
+	@Field("status")
+	private String status;
 
 	@Field("details")
 	private String details;
