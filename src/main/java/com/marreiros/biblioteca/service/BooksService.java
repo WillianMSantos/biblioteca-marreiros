@@ -68,6 +68,12 @@ public class BooksService {
 		return BookResponseDto.toBookDto(book);
 	}
 
+	public Book findBookForId(Integer id) {
+		return booksRepository.findById(id)
+				.orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,
+						"Livro não encontrado"));
+	}
+
 	public BookResponseDto findBookDtoForIsbn(String isbn){
 		Book book = findByBookForIsbn(isbn);
 		return BookResponseDto.toBookDto(book);
@@ -80,14 +86,7 @@ public class BooksService {
 							                                   "Livro não encontrado"));
 
 	}
-	
-	
-	public Book findBookForId(Integer id) {
-		return booksRepository.findById(id)
-		                      .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,
-		                                                                    "Livro não encontrado"));
-	}
-	
+
 	public void deleteBook(Integer id) {
 		booksRepository.findById(id)
 		               .map(book -> {
