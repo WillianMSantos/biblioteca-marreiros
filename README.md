@@ -35,5 +35,5 @@
   
 
 # </h2>[Swagger ](http://localhost:8080/swagger-ui.html)</h2>
-  Obs: Só irá executar se os 3 passos forem concluídos
+  Obs: Só irá executar se os 3 passos forem concluídos, ou a produção esteja no ar
 ![image](https://user-images.githubusercontent.com/47301716/177018211-cb664956-aab0-40c7-b841-d4822710010f.png)
