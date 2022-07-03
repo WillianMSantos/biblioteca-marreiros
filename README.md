@@ -24,8 +24,10 @@
 
 <h2>Executar projeto</h2>
 
-  
+ produção: https://biblioteca-marreiros.herokuapp.com/swagger-ui.html
 
+ Caso a produção esteja fora do ar:
+ <br>
 -1 Baixar/clonar projeto da branch master.<br>
 -2 Executar main da classe: BibliotecaApplication.<br>
 -3 É necessário ter o mongoDb instalado e conectado.<br>
